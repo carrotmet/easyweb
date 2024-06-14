@@ -42,6 +42,8 @@ func InitLogger(filename string, maxSize, maxBackup, maxAge int, compress bool, 
     // 将自定义的 logger 替换为全局的 logger
     // zap.L().Fatal() 调用时，就会使用我们自定的 Logger
     zap.ReplaceGlobals(Logger)
+    fmt.Println("Log filename is set to:", filename) // 打印 filename 的值
+    
 }
 
 // getEncoder 设置日志存储格式

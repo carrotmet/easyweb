@@ -22,7 +22,7 @@ func init() {
 
             /* ------------------ 滚动日志配置 ------------------ */
             // 日志文件路径
-            "filename": config.Env("LOG_NAME", "storage/logs/logs.log"),
+            "filename": config.Env("LOG_FILENAME", "storage/logs/logs.log"),
             // 每个日志文件保存的最大尺寸 单位：M
             "max_size": config.Env("LOG_MAX_SIZE", 64),
             // 最多保存日志文件数，0 为不限，MaxAge 到了还是会删

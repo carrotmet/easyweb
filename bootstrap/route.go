@@ -2,11 +2,12 @@
 package bootstrap
 
 import (
-    "easyweb/routes"
-    "net/http"
-    "strings"
+	"easyweb/app/http/middlewares"
+	"easyweb/routes"
+	"net/http"
+	"strings"
 
-    "github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin"
 )
 
 // SetupRoute 路由初始化
@@ -24,7 +25,7 @@ func SetupRoute(router *gin.Engine) {
 
 func registerGlobalMiddleWare(router *gin.Engine) {
     router.Use(
-        gin.Logger(),
+       middlewares.Logger(),
         gin.Recovery(),
     )
 }
