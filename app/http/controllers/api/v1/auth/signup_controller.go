@@ -5,7 +5,7 @@ import (
     v1 "easyweb/app/http/controllers/api/v1"
     "easyweb/app/models/user"
     "easyweb/app/requests"
-    "net/http"
+    "easyweb/pkg/response"
 
     "github.com/gin-gonic/gin"
 )
@@ -24,7 +24,7 @@ func (sc *SignupController) IsPhoneExist(c *gin.Context) {
     }
 
     //  检查数据库并返回响应
-    c.JSON(http.StatusOK, gin.H{
+    response.JSON(c, gin.H{
         "exist": user.IsPhoneExist(request.Phone),
     })
 }
@@ -35,7 +35,7 @@ func (sc *SignupController) IsEmailExist(c *gin.Context) {
     if ok := requests.Validate(c, &request, requests.ValidateSignupEmailExist); !ok {
         return
     }
-    c.JSON(http.StatusOK, gin.H{
+    response.JSON(c, gin.H{
         "exist": user.IsEmailExist(request.Email),
     })
 }

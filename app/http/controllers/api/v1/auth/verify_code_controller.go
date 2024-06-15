@@ -4,7 +4,7 @@ import (
     v1 "easyweb/app/http/controllers/api/v1"
     "easyweb/pkg/captcha"
     "easyweb/pkg/logger"
-    "net/http"
+    "easyweb/pkg/response"
 
     "github.com/gin-gonic/gin"
 )
@@ -22,10 +22,8 @@ func (vc *VerifyCodeController) ShowCaptcha(c *gin.Context) {
     logger.LogIf(err)
 	//测试answer
 	println(answer)
-    // 返回给用户
-    c.JSON(http.StatusOK, gin.H{
+    response.JSON(c, gin.H{
         "captcha_id":    id,
         "captcha_image": b64s,
-		"captcha_answer": answer,
     })
 }
