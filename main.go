@@ -47,6 +47,13 @@ func main() {
     // 初始化路由绑定
     bootstrap.SetupRoute(router)
 
+
+    //测试短信服务
+    // sms.NewSMS().Send("17389186028", sms.Message{
+    //     Template: config.GetString("sms.aliyun.template_code"),
+    //     Data:     map[string]string{"code": "1234"},
+    // })
+
     // 运行服务
     err := router.Run(":" + config.Get("app.port"))
     if err != nil {
