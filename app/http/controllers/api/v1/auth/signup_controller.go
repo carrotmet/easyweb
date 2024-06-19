@@ -2,12 +2,13 @@
 package auth
 
 import (
-    v1 "easyweb/app/http/controllers/api/v1"
-    "easyweb/app/models/user"
-    "easyweb/app/requests"
-    "easyweb/pkg/response"
+	v1 "easyweb/app/http/controllers/api/v1"
+	"easyweb/app/models/user"
+	"easyweb/app/requests"
+	"easyweb/pkg/jwt"
+	"easyweb/pkg/response"
 
-    "github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin"
 )
 
 // SignupController 注册控制器
@@ -51,16 +52,18 @@ func (sc *SignupController) SignupUsingPhone(c *gin.Context) {
     }
 
     // 2. 验证成功，创建数据
-    _user := user.User{
+    userModel := user.User{
         Name:     request.Name,
         Phone:    request.Phone,
         Password: request.Password,
     }
-    _user.Create()
+    userModel.Create()
 
-    if _user.ID > 0 {
+    if userModel.ID > 0 {
+        token := jwt.NewJWT().IssueToken(userModel.GetStringID(), userModel.Name)
         response.CreatedJSON(c, gin.H{
-            "data": _user,
+            "token": token,
+            "data":  userModel,
         })
     } else {
         response.Abort500(c, "创建用户失败，请稍后尝试~")
