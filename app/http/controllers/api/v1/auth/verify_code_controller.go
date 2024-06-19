@@ -1,12 +1,14 @@
 package auth
 
 import (
-    v1 "easyweb/app/http/controllers/api/v1"
-    "easyweb/pkg/captcha"
-    "easyweb/pkg/logger"
-    "easyweb/pkg/response"
+	v1 "easyweb/app/http/controllers/api/v1"
+	"easyweb/app/requests"
+	"easyweb/pkg/captcha"
+	"easyweb/pkg/logger"
+	"easyweb/pkg/response"
+    "easyweb/pkg/verifycode"
 
-    "github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin"
 )
 
 // VerifyCodeController 用户控制器
@@ -26,4 +28,23 @@ func (vc *VerifyCodeController) ShowCaptcha(c *gin.Context) {
         "captcha_id":    id,
         "captcha_image": b64s,
     })
+}
+
+
+
+// SendUsingPhone 发送手机验证码
+func (vc *VerifyCodeController) SendUsingPhone(c *gin.Context) {
+
+    // 1. 验证表单
+    request := requests.VerifyCodePhoneRequest{}
+    if ok := requests.Validate(c, &request, requests.VerifyCodePhone); !ok {
+        return
+    }
+
+    // 2. 发送 SMS
+    if ok := verifycode.NewVerifyCode().SendSMS(request.Phone); !ok {
+        response.Abort500(c, "发送短信失败~")
+    } else {
+        response.Success(c)
+    }
 }

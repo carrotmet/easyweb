@@ -1,12 +1,14 @@
 package main
 
 import (
-    "fmt"
-    "easyweb/bootstrap"
-	"flag"
-    "github.com/gin-gonic/gin"
-	"easyweb/pkg/config"
+	"easyweb/bootstrap"
 	btsConfig "easyweb/config"
+	"easyweb/pkg/config"
+	"easyweb/pkg/verifycode"
+	"flag"
+	"fmt"
+
+	"github.com/gin-gonic/gin"
 )
 
 func init() {
@@ -54,6 +56,9 @@ func main() {
     //     Data:     map[string]string{"code": "1234"},
     // })
 
+    //测试验证码服务
+    testy:=verifycode.NewVerifyCode().SendSMS("17389186028")
+    print(testy)
     // 运行服务
     err := router.Run(":" + config.Get("app.port"))
     if err != nil {
