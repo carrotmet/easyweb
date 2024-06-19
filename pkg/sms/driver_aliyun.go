@@ -7,6 +7,7 @@ import (
     aliyunsmsclient "easyweb/pkg/aliyun-communicate-master"
 )
 
+//基础学开源项目学的就是它的主调函数
 // Aliyun 实现 sms.Driver interface
 type Aliyun struct{}
 

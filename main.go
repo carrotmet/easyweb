@@ -4,7 +4,6 @@ import (
 	"easyweb/bootstrap"
 	btsConfig "easyweb/config"
 	"easyweb/pkg/config"
-	"easyweb/pkg/verifycode"
 	"flag"
 	"fmt"
 
@@ -57,8 +56,10 @@ func main() {
     // })
 
     //测试验证码服务
-    testy:=verifycode.NewVerifyCode().SendSMS("17389186028")
-    print(testy)
+    // testy:=verifycode.NewVerifyCode().SendSMS("17389186028")
+    // print(testy)
+
+
     // 运行服务
     err := router.Run(":" + config.Get("app.port"))
     if err != nil {
