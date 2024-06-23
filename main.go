@@ -6,7 +6,6 @@ import (
 	"easyweb/pkg/config"
 	"flag"
 	"fmt"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -65,6 +64,10 @@ func main() {
     //     response.Data(c, userModel)
     // })
 
+    //测试guest中间件
+    // router.GET("/test_guest", middlewares.GuestJWT(), func(c *gin.Context) {
+    //     c.String(http.StatusOK,  "Hello guest")
+    // })
     // 运行服务
     err := router.Run(":" + config.Get("app.port"))
     if err != nil {
