@@ -18,3 +18,12 @@ func ValidateVerifyCode(key, answer string, errs map[string][]string) map[string
     }
     return errs
 }
+
+// ValidatePassword 自定义规则，检查验证码是否正确
+func ValidateCaptcha(id, answer string, errs map[string][]string) map[string][]string{
+    if ok := verifycode.NewVerifyCode().CheckAnswer(id,answer); !ok {
+        errs["captcha_answer"] = append(errs["captcha_answer"], "验证码错误")
+    }
+    return errs
+}
+
