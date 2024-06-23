@@ -59,6 +59,11 @@ func main() {
     // testy:=verifycode.NewVerifyCode().SendSMS("17389186028")
     // print(testy)
 
+    //测试auth中间件
+    // router.GET("/test_auth", middlewares.AuthJWT(), func(c *gin.Context) {
+    //     userModel := auth.CurrentUser(c)
+    //     response.Data(c, userModel)
+    // })
 
     // 运行服务
     err := router.Run(":" + config.Get("app.port"))
